@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Umineko Project"><link rel="manifest" href="/site.webmanifest"><meta name="generator" content="Astro v5.1.2"><!-- Primary Meta Tags --><title>Known issues | Umineko Project</title><meta name="title" content="Known issues"><meta name="description"><meta name="keywords" content="Umineko Project, Umineko, PS3 port, remake, rondo, ps3fication, Umineko no Naku Koro ni, чайки"><meta name="msvalidate.01" content="BED5354C97F23315B056AEBCF7D02F04"><meta name="google-site-verification" content="iZn8SiLaE7j0LoXu-bwBt5utGLZ4LzvDhYOHhE8Z4eo"><meta name="yandex-verification" content="581757fe0edea9f6"><link rel="alternate" type="application/rss+xml" title="Umineko Project » Feed" href="/rss.xml"><link rel="alternate" hreflang="en" href="/en/known-issues/"><link rel="alternate" hreflang="ru" href="/ru/%d0%b8%d0%b7%d0%b2%d0%b5%d1%81%d1%82%d0%bd%d1%8b%d0%b5-%d0%bf%d1%80%d0%be%d0%b1%d0%bb%d0%b5%d0%bc%d1%8b/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://umineko-project.org/known-issues/"><meta property="og:title" content="Known issues"><meta property="og:description"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://umineko-project.org/known-issues/"><meta property="twitter:title" content="Known issues"><meta property="twitter:description"><link rel="stylesheet" href="/_astro/_wp_.BIIk1wDX.css"></head> <body> <header> <div> <div class="title-block"> <h2><a href="/en/">Umineko Project</a></h2> Umineko Project blog, Umineko no Naku Koro ni port to PC </div> <nav id="nav-top"> <a href="/en"> Main </a> <a href="/en/team-info"> Team Info </a> <a href="/en/project-info"> Project Info </a> <a href="/en/frequently-asked-questions"> FAQ </a> <a href="/en/known-issues" class="active"> Known Issues </a> <a href="/en/umineko-multilingua"> Umineko Multilingua </a> <a href="/en/downloads"> Downloads </a> <a href="/en/contacts"> Contacts </a> <a href="https://github.com/umineko-project/forum.umineko-project.org/discussions"> Forum </a> <a href="https://www.youtube.com/channel/UCvlmp5bTERQZQdK1cFp9ZDQ"> <img src="/youtube.svg" style="height: 16px" alt=""> </a> <a href="/ru/%d0%b8%d0%b7%d0%b2%d0%b5%d1%81%d1%82%d0%bd%d1%8b%d0%b5-%d0%bf%d1%80%d0%be%d0%b1%d0%bb%d0%b5%d0%bc%d1%8b/"> Русский 🇷🇺 </a> </nav> </div> </header> <main> <article> <h1 class="title">Known issues</h1> <h2 id="general">General</h2>
+<p><em><strong>— Line jumping from the log is slow/glitchy.</strong></em><br>
+We decided not to optimise it in this release. It will be fixed later.<br>
+<em><strong>— Log loading may be slow sometimes.</strong></em><br>
+We partially optimised it, but that’s a work in progress. Wait for an update.<br>
+<em><strong>— Some gamepads don’t work.</strong></em><br>
+Gamepad support is to be improved in general, if you are on Windows and your gamepad does not work, try using x360-compatible mode. If that still fails, contact us on the forums.<br>
+<em><strong>— Certain virtualisation software has compatibility issues in their OpenGL drivers.</strong></em><br>
+* Parallels Desktop may create visual artifacts unless <code>no-texture-reuse</code> argument is present in ons.cfg.<br>
+* VMware Fusion 8 as well as VMware Workstation 12 have serious performance issues in OpenGL 3.3 compatible mode (enabled by default). To workaround upgrade to 8.5/12.5 and add <code>simulate-reads</code> and <code>no-glclear</code> options to ons.cfg. Another way is to set VM compatibility version to 11 or lower but is not recommended.<br>
+<em><strong>— Irritating static noise during audio playback.</strong></em><br>
+Starting with episode 5 and newer you may add <code>audioformat=f32</code> into ons.cfg to fix this issue.</p>
+<h2 id="macos-specific">macOS specific</h2>
+<p><em><strong>— Force feedback may not work.</strong></em><br>
+Force feedback is not supported on most gamepads on macOS.<br>
+<em><strong>— Screen tearing may happen on old hardware.</strong></em><br>
+Try <code>force-vsync</code> option in ons.cfg.</p>
+<h2 id="linux-specific">Linux specific</h2>
+<p><em><strong>— No sound and ALSA lib pcm.c:7843:(snd_pcm_recover) underrun occurred errors.</strong></em><br>
+Run <code>export PULSE_LATENCY_MSEC=30</code> in terminal before launching the game.<br>
+Newer pulse drivers may have <a href="http://forum.kodi.tv/showthread.php?tid=228988&#x26;page=5">issues</a> with parsing <code>PULSE_LATENCY_MSEC</code> environment variable. As a workaround you might have to pass an invalid number (<code>export PULSE_LATENCY_MSEC=NOVALUE</code>).<br>
+Another way is to increase audio buffer to a larger value, to do so try adding <code>audiobuffer=8</code> option in ons.cfg. 8 stands for buffer size in KB and could also be 1, 2, 4, and 16 (default is 2).<br>
+<em><strong>— The game may not start or crash with “Audio target ‘pulse’ not available” message.</strong></em><br>
+Launch the engine with <code>--audiodriver=alsa</code> argument or put <code>audiodriver=alsa</code> into ons.cfg.<br>
+<em><strong>— Game dock icon may be generic or completely missing.</strong></em><br>
+This is a known bug of Ubuntu Unity and SDL. We have no solution other than creating a “desktop” shortcut, which may still not always work.<br>
+<em><strong>— Game window content may flicker while moving the window.</strong></em><br>
+Ignore this. It happens due to some refresh rate specifics of window managers(?).<br>
+<em><strong>— Several paths may create issues to launching the game.</strong></em><br>
+When launching the game from a network share on Linux (e.g. from a path like <code>/run/user/1000/gvfs/afp-volume:host=DataCentre.local,user-anonymouse,volume=Umineko</code>) the engine may report that it failed to obtain selfpath. To workaround this issue create a link to this folder in a path not containing any special symbols.</p>
+<h2 id="windows-specific">Windows specific</h2>
+<p><em><strong>— <a id="memlimit"></a>The game may show “Memory allocation failure!” message and crash on 32-bit systems.</strong></em><br>
+By default 32-bit Windows limits the virtual memory available to user applications by 2 GB. We do not exceed this value, however, due to specifics of Windows Heap memory manager the allocated memory gets fragmented, and a large contiguous memory chunk allocation we need may fail. Fortunately this limit is mainly left for historical reasons, and you can easily increase it up to 3 GB.<br>
+<em>Windows Vista and newer</em>:<br>
+Run Command Line with administrator rights and enter the command <code>bcdedit /set IncreaseUserVa 3072</code>, here 3072 stands for the amount of memory in megabytes. Reboot your system. To undo the setting enter <code>bcdedit /deletevalue IncreaseUserVa</code>.<br>
+<em>Windows XP</em>:<br>
+Go to My Computer → Properties → Advanced tab → Startup and Recovery → Settings → Edit. Notepad will appear with a boot.ini configuration file. Find a line similar to <code>multi(0)disk(0)rdisk(0)partition(2)\WINDOWS="Microsoft Windows XP Professional" /fastdetect</code> and add <code>/3GB /userva=2900</code> to it, so it becomes <code>multi(0)disk(0)rdisk(0)partition(2)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /3GB /userva=2900</code>. Here 2900 stands for the amount of memory in megabytes, it is not recommended to use a higher value but a slightly lower value might perform better in some cases. Save the file and reboot. To undo remove the added parameters.<br>
+<em><strong>— The game may not start with Avast Internet Security 2015 installed.</strong></em><br>
+Avast Internet Security 10.4.2233 and possibly some others have a bug in their DeepScan module causing the game freeze at start time. The process will simply appear appear in the process list without a way to kill it. The solutions are to disable DeepScan or to upgrade to 11.1.2245 or newer, which is preferred.<br>
+To upgrade to a new version open the program, go to Settings → Update, and press Update Program button.<br>
+To quickly disable DeepScreen open the program, go to Settings → General, and untick Enable DeepScreen.<br>
+<em><strong>— Game performance may greatly decrease when using Aero themes (Windows Vista, 7).</strong></em><br>
+Disable the Aero theme globally/in program properties or switch to fullscreen mode.<br>
+<em><strong>— The game may crash when starting on Windows 7 Home Basic.</strong></em><br>
+A solution is to select Disable visual themes and Disable Desktop composition in Executable properties -> compatibility<br>
+<em><strong>— <a id="video_issues"></a>There may be various visual glitches on some laptops with ATI HD 5xxx video cards on Windows 7 x64.</strong></em><br>
+A solution is to update your GPU drivers. <a href="http://files.radeon.ru/drivers/amd/mobility/13-4_mobility_vista_win7_win8_64_dd_ccc_whql.exe">Catalyst Mobility 13.4</a> is suggested. This <a href="https://mega.co.nz/#!PJ92TILC!fg94r0qCVqVIgWccIV3Zd3iPsG8h1XNZOUd9s0DvC6Y">dll fix</a> is likely going to be required to fix dxva playback after updating. Put atiumd6a.dll, atiumd6a.cap to C:\Windows\System32\ and atiumdva.dll, atiumdva.cap to C:\Windows\SysWOW64\.<br>
+<em><strong>— Screen tearing may happen with Intel HD video cards.</strong></em><br>
+The issue happens due to VSync detection failure and the only known fix at the moment is to force enable it in preferences. Intel HD Graphics Control Panel → 3D → General Settings → Custom Settings (set this) → Vertical Sync → Driver Settings (set this).<br>
+<em><strong>— Various visual glitches (like black rectangles, missing textures, random glitches) are known to exist with modern NVIDIA GPU drivers.</strong></em><br>
+New drivers seem to select integrated graphics chip for our engine to some reason. A solution is to manually choose High-Performance NVIDIA Processor for our application in NVIDIA Preference Pane → 3D Settings → Program Settings.<br>
+<em><strong>— Various visual glitches (like black rectangles, missing textures, random glitches) are known to exist with certain Intel HD 3000 GPUs and newer</strong></em><br>
+This is partially fixed with our Episode 2 and Episode 3 releases, however, you might need to add an extra configuration option to the ons.cfg file. Firstly try a <code>no-glclear</code> option. If it fails to help, replace it with a <code>no-texture-reuse</code> line. This should fix the glitches, however, you might want a more powerful PC with discrete graphics for a better experience.<br>
+<em><strong>— The game may freeze after clicking on “Official Site” button on Windows 8 and newer systems.</strong></em><br>
+This is an issue in the way different browsers register themselves in the system. You either need to reinstall your default browser or set Internet Explorer as the default one (IE → Properties → Browser Properties → Programs).<br>
+<em><strong>— Force feedback may not work out of the box on some gamepads.</strong></em><br>
+Try using x360-compatible gamepad interface emulation in driver preferences.<br>
+<em><strong>— Black stripes or incorrect picture positioning may happen in fullscreen mode.</strong></em><br>
+We know of two causes of this issue, both are only reproducible on Windows.<br>
+* <code>scale</code> ons.cfg argument used together with <code>window-width</code> argument setting window resolution lower than screen resolution.<br>
+* <code>window-width</code> argument with higher resolution than screen resolution.</p> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 Umineko Project. All rights reserved.
+</footer>  </body></html>
